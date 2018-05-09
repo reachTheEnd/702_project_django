@@ -33,6 +33,7 @@ class UserFormView(TemplateView):
 			password= form.cleaned_data['password']
 
 			department=profile_form.cleaned_data['department']
+			distance=profile_form.cleaned_data['distance']
 			user.set_password(password)
 
 
