@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form  method="post"> 
+<!-- 		<input type="text" name="username" placeholder="username">
+		<input type="text" name="department" placeholder="department">
+		<input type="password" name="password" placeholder="password">
+		<button type="submit" name="submit">Sign up</button> -->
+		{% csrf_token %}
+		{{ form.as_p }}
+		{{ profile_form.as_p }}
+<!-- 		{{ profile_form.as_p }} -->
+		<button type="submit">Save changes</button>
+
+	</form>
+</body>
+</html>
