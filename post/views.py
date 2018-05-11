@@ -5,8 +5,9 @@ from .models import User, Employee
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, TemplateView
-from .forms import UserForm, ProfileForm
-
+from .forms import UserForm, ProfileForm, UserLoginForm
+from django.shortcuts import HttpResponseRedirect
+from django.urls import reverse_lazy
 # Create your views here.
 # class HomeView(TemplateView):
 # 	template_name = 'post/base.html'
@@ -24,7 +25,7 @@ from .forms import UserForm, ProfileForm
 	
 # 	    return context
 def index(request):
-	return render(request, 'post/base.html')
+	return render(request, 'post/base_not_log.html')
 
 
 def logined(request):
@@ -34,8 +35,46 @@ def logined(request):
 	return render(request, 'post/base.html')
 
 
+def logout_view(request):
+	logout(request)
+	return render(request, 'post/base_not_log.html')
 
- 
+class UerLoginForm(TemplateView):
+	template_name = 'post/user_login.html'
+
+	def get(self, request):
+		form = UserLoginForm
+		return render(request, self.template_name, {'form': form})
+	def post(self, request):
+		form = UserLoginForm(request.POST)
+		if form.is_valid():
+			username = form.cleaned_data['username']
+			password= form.cleaned_data['password']
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				if user.is_active:
+					login(request, user)
+					return redirect('post:logined')
+				else:
+					return render(request, self.template_name, {'form': form, 'profile_form': profile_form})
+	    #             return render(request, 'music/login.html', {'error_message': 'Your account has been disabled'})
+	    #     else:
+	    #         return render(request, 'music/login.html', {'error_message': 'Invalid login'})
+	    # return render(request, 'music/login.html')
+
+			return render(request, self.template_name, {'form': form, 'profile_form': profile_form})
+
+
+
+
+
+
+
+
+
+
+
+
 class UserFormView(TemplateView):
 	template_name = 'post/registration_form.html'	
 
@@ -66,7 +105,7 @@ class UserFormView(TemplateView):
 					login(request, user)
 					profile.user = request.user
 					profile.save()
-					return redirect('post:logined')
+					return redirect('post:logined') 
 
 		return render(request, self.template_name, {'form': form, 'profile_form': profile_form})
 
