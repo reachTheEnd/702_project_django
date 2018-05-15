@@ -56,13 +56,13 @@ class UerLoginForm(TemplateView):
 					login(request, user)
 					return redirect('post:logined')
 				else:
-					return render(request, self.template_name, {'form': form, 'profile_form': profile_form})
+					return render(request, self.template_name, {'form': form})
 	    #             return render(request, 'music/login.html', {'error_message': 'Your account has been disabled'})
 	    #     else:
 	    #         return render(request, 'music/login.html', {'error_message': 'Invalid login'})
 	    # return render(request, 'music/login.html')
 
-			return render(request, self.template_name, {'form': form, 'profile_form': profile_form})
+			return render(request, self.template_name, {'form': form})
 
 
 
