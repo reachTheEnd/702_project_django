@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import Employee
+from .models import Employee, User_information
 from django.contrib.auth import authenticate, login, logout, get_user_model
 
 
@@ -19,6 +19,12 @@ class ProfileForm(forms.ModelForm):
 	class Meta:
 		model = Employee
 		fields = ['department', 'distance']
+
+class Uers_information_Form(forms.ModelForm):
+	class Meta:
+		model = User_information
+		fields = ['age', 'gender', 'occupation']
+
 
 class UserLoginForm(forms.Form):
 	username = forms.CharField()

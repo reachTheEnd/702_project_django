@@ -1,11 +1,11 @@
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views import generic
-from .models import User, Employee
+from .models import User, Employee, User_information
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View, TemplateView
-from .forms import UserForm, ProfileForm, UserLoginForm
+from .forms import UserForm, ProfileForm, UserLoginForm, Uers_information_Form
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse_lazy
 # Create your views here.
@@ -29,9 +29,10 @@ def index(request):
 
 
 def logined(request):
-	b = Employee.objects.get(user = request.user)
-	print(b.department)
-	print(b.distance)
+	b = User_information.objects.get(user = request.user)
+	print(b.age)
+	print(b.gender)
+	print(b.occupation)
 	return render(request, 'post/base.html')
 
 
@@ -80,12 +81,12 @@ class UserFormView(TemplateView):
 
 	def get(self, request):
 		form = UserForm()
-		profile_form = ProfileForm()
+		profile_form = Uers_information_Form()
 		return render(request, self.template_name, {'form': form, 'profile_form': profile_form})
 
 	def post(self, request):
 		form = UserForm(request.POST)
-		profile_form = ProfileForm(request.POST)
+		profile_form = Uers_information_Form(request.POST)
 
 		if form.is_valid():
 
@@ -94,8 +95,9 @@ class UserFormView(TemplateView):
 			username=form.cleaned_data['username']
 			password= form.cleaned_data['password']
 
-			department=profile_form.cleaned_data['department']
-			distance=profile_form.cleaned_data['distance']
+			age=profile_form.cleaned_data['age']
+			gender=profile_form.cleaned_data['gender']
+			occupation=profile_form.cleaned_data['occupation']
 			user.set_password(password)
 
 			user.save()
