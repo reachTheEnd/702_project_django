@@ -1,0 +1,7 @@
+```{r}
+item <- read.csv("item.txt", header = FALSE, sep = "|")
+item <- subset( item, select = -V4 )
+item <- subset( item, select = -c(V6:V24))
+write.csv(item, file = "MyData.csv",row.names=FALSE, na="")
+```
+

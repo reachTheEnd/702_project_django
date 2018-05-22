@@ -23,7 +23,7 @@ n.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Recommender System</title>
   </head>
 
   <body>
@@ -35,20 +35,20 @@ n.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L
         <ul class="navbar-nav flex-row mr-lg-0">
 
             <li class="nav-item">
-                 <a class="nav-link pr-1"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+                 <a class="nav-link pr-1" href="https://www.facebook.com/sharer/sharer.php?u="><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link pr-1"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a class="nav-link pr-1" href="https://twitter.com/home?status="><i class="fa fa-twitter" aria-hidden="true"></i></a>
             </li>
 
-            <li class="nav-item"> <a class="nav-link pr-1"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            <li class="nav-item"> <a class="nav-link pr-1" href="https://pinterest.com/pin/create/button/?url=&media=&description="><i class="fa fa-pinterest" aria-hidden="true"></i></a>
             </li>
 
-            <li class="nav-item"> <a class="nav-link pr-1"><i class="fa fa-google" aria-hidden="true"></i></a>
+            <li class="nav-item"> <a class="nav-link pr-1" href="https://plus.google.com/share?url="><i class="fa fa-google" aria-hidden="true"></i></a>
             </li>
 
-            <li class="nav-item"> <a class="nav-link pr-1"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <li class="nav-item"> <a class="nav-link pr-1" href="https://www.linkedin.com/shareArticle?mini=true&url=&title=&summary=&source="><i class="fa fa-linkedin" aria-hidden="true"></i></a>
             </li>
 
             <li class="nav-item dropdown">
@@ -56,7 +56,11 @@ n.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="">User</a>
-                    {% block register_active %}{% endblock %}
+                    {% if user.is_active %}
+                    <a class="dropdown-item" href="http://localhost:8000/post/logout/">Logout</a>
+                    {% else %}
+                    <a class="dropdown-item" href="http://localhost:8000/post/userlogin/">login</a>
+                    {% endif %}
                 </div>
             </li>
         </ul>
@@ -76,10 +80,10 @@ n.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="http://localhost:8000/post/index/">Link</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="http://localhost:8000/post/index2/">Link</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -112,7 +116,6 @@ n.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-    <script src="js/vendor/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
   </body>
 </html>

@@ -1,0 +1,16 @@
+{% extends 'post/nav_bar.html' %}
+{% load static%}
+
+
+
+{% block body %}
+    <ul class="list-group">
+      {% for movie in object_list%}
+        <li class="list-group-item list-group-item-dark">
+          <a class="col-sm-88" href="{% url 'post:detail' movie.id %}">{{movie.name}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+
+{% endblock %}

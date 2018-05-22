@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 
 User = get_user_model()
 
+
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
@@ -24,7 +26,6 @@ class Uers_information_Form(forms.ModelForm):
 	class Meta:
 		model = User_information
 		fields = ['age', 'gender', 'occupation']
-
 
 class UserLoginForm(forms.Form):
 	username = forms.CharField()
